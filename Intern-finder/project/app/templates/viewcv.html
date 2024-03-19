@@ -1,0 +1,189 @@
+<!-- cv_details.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Details</title>
+    <!-- CSS links and other dependencies -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f2f2f2;
+                margin: 0;
+            }
+
+            .sidebar {
+                margin:0;
+                padding: 0;
+                width: 200px;
+                background-color: #f1f1f1;
+                position: fixed;
+                height: 100%;
+                overflow: auto;
+              }
+              
+              .sidebar a {
+                display: block;
+                color: black;
+                padding: 16px;
+                text-decoration: none;
+              }
+               
+              .sidebar a.active {
+                background-color: #0476aa;
+                color: white;
+              }
+              
+              .sidebar a:hover:not(.active) {
+                background-color: #555;
+                color: white;
+              }
+        
+            h1 {
+                text-align: center;
+                margin-bottom: 20px;
+                border-bottom: 1px solid #9AD0C2;
+                padding:20px;
+                color:#265073;
+            }
+        
+            .cv-container {
+                border: 1px solid #F1FADA;
+                border-radius: 25px;
+                padding: 20px;
+                background-color: #58A399;
+                
+                
+            }
+
+            .container{
+                margin:50;
+            }
+        
+            .cv-field {
+                margin-bottom: 10px;
+            }
+        
+            .cv-field label {
+                display: inline-block;
+                font-size: 18px;
+                font-weight: bold;
+                margin: 5px;
+                
+                padding-bottom: 5px;
+                width: 200px;
+            }
+
+            .cv-field span {
+                display: inline-block; /* Change from block to inline-block */
+                padding-bottom: 5px;
+                border-bottom: 1px solid #50727B;
+                margin: 5px;
+                width: 700px;
+
+                
+        
+            }
+        
+            /* Adjustments for smaller screens */
+            @media (max-width: 768px) {
+                .cv-field label {
+                    font-size: 16px;
+                }
+            }
+        
+            /* Adjustments for even smaller screens */
+            @media (max-width: 480px) {
+                .cv-container {
+                    padding: 15px;
+                }
+                .cv-field label {
+                    font-size: 14px;
+                }
+            }
+        </style>
+           
+    
+</head>
+
+
+
+
+<body>
+
+
+<div class="container">
+
+    {% for cv in cv_data %}
+
+    <div class="cv-container">
+
+        <h1>CV OF APPLICANT</h1>
+
+        <div class="cv-field">
+            <label >Full Name:</label>
+            <span>{{ cv.full_name }}</span>
+        </div>
+        <div class="cv-field">
+            <label>Student NIC:</label>
+            <span>{{ cv.nic }}</span>
+        </div>
+        <div class="cv-field">
+            <label>Age:</label>
+            <span>{{ cv.age }}</span>
+        </div>
+        <div class="cv-field">
+            <label>Gender:</label>
+            <span>{{ cv.gender }}</span>
+        </div>
+        <div class="cv-field">
+            <label>Email:</label>
+            <span>{{ cv.email }}</span>
+        </div>
+        <div class="cv-field">
+            <label>Telephone:</label>
+            <span>{{ cv.telephone }}</span>
+        </div>
+        <div class="cv-field">
+            <label>Institute:</label>
+            <span>{{ cv.institute }}</span>
+        </div>
+        <div class="cv-field">
+            <label>Degree:</label>
+            <span>{{ cv.degree }}</span>
+        </div>
+        <div class="cv-field">
+            <label>Work Experience:</label>
+            <span>{{ cv.work_exp }}</span>
+        </div>
+        <div class="cv-field">
+            <label>Work Company:</label>
+            <span>{{ cv.work_company }}</span>
+        </div>
+        <div class="cv-field">
+            <label>Skills:</label>
+            <span>{{ cv.skills }}</span>
+        </div>
+        <div class="cv-field">
+            <label>Projects:</label>
+            <span>{{ cv.projects }}</span>
+        </div>
+        <div class="cv-field">
+            <label>Optional Details:</label>
+            <span>{{ cv.optional_details }}</span>
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+</body>
+</html>
