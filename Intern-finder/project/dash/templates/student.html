@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Professional Dashboard</title>
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      /* Custom CSS for Dashboard */
+      body {
+        font-family: Arial, sans-serif;
+        /*background-image: url('https://i.pinimg.com/236x/ad/c5/f7/adc5f702471c39f16ec8039697ff3bd5.jpg');*/
+      }
+      .panel {
+        background-color: #343a40;
+        color: #fff;
+        padding: 20px;
+        height: 100vh;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .panel a {
+        color: #007bff; /* Set the color to match the panel background */
+        text-decoration: none;
+        display: inline-block;
+        padding: 8px 16px;
+        border-radius: 5px;
+        background-color: #C0C0C0; /* Set background color to white */
+        border: 2px solid #007bff; /* Add border matching the panel background */
+        transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+      }
+      
+      .panel a:hover {
+        background-color: #007bff; /* Change background color on hover */
+        color: #fff; /* Change text color on hover */
+      }
+      
+      .panel a:visited {
+        color: #007bff; /* Set visited link color */
+      }
+      
+      .panel a:focus {
+        outline: none;
+        border-color: #0056b3; /* Adjust border color on focus */
+      }
+      
+      .main-content {
+        padding-top: 25px;
+      }
+      .card {
+        border: none;
+        border-radius: 10px;
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease-in-out;
+        overflow: hidden;
+      }
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+      }
+      .card-header {
+        background: linear-gradient(to right, #007bff, #0056b3);
+        color: #fff;
+        border-radius: 15px 15px 0 0;
+        padding: 10px;
+      }
+      .card-title {
+        font-size: 24px;
+        margin-bottom: 10px;
+        color: #fff; /* Changed text color to white */
+      }
+      .table {
+        margin-bottom:10px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+      th,
+      td {
+        border: none;
+        padding: 12px;
+      }
+      thead {
+        background-color: #007bff;
+        color: #fff;
+      }
+      tbody tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+      tbody tr:hover {
+        background-color: #ddd;
+      }
+      hr {
+        height: 2px;
+        width: 100%;
+        color: #ffffff;
+        margin: 20px auto;
+        border-style: solid;
+      }
+      .styled-hr {
+        border-color: rgb(255, 255, 255);
+      }
+      .col-md-3 {
+        padding-left: 0;
+      }
+      #topic{
+        text-align: center;
+      }
+      td button {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="panel">
+            <h5 class="mb-4">Student Information</h5>
+            <p><strong>Student Name : </strong>{{username}}</p>
+            <hr class="styled-hr" />
+            <p><strong>Email : </strong>{{ stu.email }}</p>
+            <hr class="styled-hr" />
+            <p><strong>Role : </strong>{{ stu.job_role }}</p>
+            <hr class="styled-hr" />
+            <a href="/student_list">Edit student details</a>
+            <hr class="styled-hr" />
+            <a href="/cvindex">Add CV</a>
+            <hr class="styled-hr" />
+            <a href="/mycv">Edit my CV</a>
+            <hr class="styled-hr" />
+            <a href="#" onclick="confirmLogout()">Logout</a>
+          </div>
+        </div>
+        <div class="col-md-9 main-content">
+          <div class="row mb-4">
+            <div class="col-md-4">
+              <div class="card">
+                <div class="card-header">
+                  <h5 class="card-title">Posts</h5>
+                  <hr class="styled-hr" />
+                  <p><strong>No. of posts:</strong> {{ data|length }}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card">
+                <div class="card-header">
+                  <h5 class="card-title">Requested interviews</h5>
+                  <hr class="styled-hr" />
+                  <p><strong>Pending : </strong>{{ datap|length }}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card">
+                <div class="card-header">
+                  <h5 class="card-title">Confirmed Interviews</h5>
+                  <hr class="styled-hr" />
+                  <p><strong>Scheduled : </strong>{{ datai|length }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+            <div class="row">
+              <div class="col-md-12">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th colspan="4" id="topic">
+                        Posts
+                      </th>
+                    </tr>
+                    <tr>
+                      <th>Company</th>
+                      <th>Job role</th>
+                      <th>Apply</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for d in data %}
+                    <tr>
+                      <td>
+                        {% for company in datac %}
+                          {% if company.company_id == d.companyid %}
+                            {{ company.cmp_name }}
+                          {% endif %}
+                        {% endfor %}
+                      </td>
+                      <td>{{d.jobrole}}</td>
+                      <td><button onclick="redirectToApply('{{d.companyid}}', '{{d.jobrole}}')">More..</button></td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th colspan="4" id="topic">
+                        Interviews
+                      </th>
+                    </tr>
+                    <tr>
+                      <th>NIC</th>
+                      <th>Position</th>
+                      <th>Date</th>
+                      <th>Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for intw in datai %}
+                      <tr>
+                        <td>{{intw.stu_nic}}</td>
+                        <td>{{intw.position}}</td>
+                        <td>{{intw.date}}</td>
+                        <td>{{intw.time}}</td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <script>
+      function redirectToApply(companyid, jobrole) {
+        // Find the company name corresponding to the company ID
+        var companyName = "";
+        {% for company in datac %}
+          if ("{{ company.company_id }}" === companyid) {
+            companyName = "{{ company.cmp_name }}";
+          }
+        {% endfor %}
+    
+        // Construct URL with query parameters
+        var url = "/apply?companyid=" + encodeURIComponent(companyid) + "&jobrole=" + encodeURIComponent(jobrole) + "&companyname=" + encodeURIComponent(companyName);
+        
+        // Redirect to apply.html with the data in query parameters
+        window.location.href = url;
+    }
+    
+    function confirmLogout() {
+        // Show a confirmation dialog
+        if (confirm("Are you sure you want to logout?")) {
+          // Redirect to the logout page
+          window.location.href = "/";
+        }
+      }
+    </script>
+    
+  </body>
+</html>
